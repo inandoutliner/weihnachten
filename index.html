@@ -6,18 +6,20 @@
 <title>Hoch die Hände, Jahresende!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=sentient@300,400,500,700,400i,500i&display=swap">
 <style>
 :root { --orange: #f26b21; --sand: #f6c886; --cream: #fbeedb; --brown: #3a2416; --ink: #2a1a10; --white: #fff;
-  --head: "Tilt Warp", "Arial Rounded MT Bold", "Helvetica Neue", Arial, sans-serif; --body: "Onest", "Helvetica Neue", Arial, sans-serif; }
+  --head: "Sentient", Georgia, "Times New Roman", serif; --body: "Onest", "Helvetica Neue", Arial, sans-serif; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body { font: 500 16px/1.45 var(--body); color: var(--brown); background: var(--cream); -webkit-font-smoothing: antialiased; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
 [hidden] { display: none !important; }
-h1, h2, h3 { font-family: var(--head); font-weight: 400; text-transform: uppercase; letter-spacing: -.01em; margin: 0; line-height: .92; }
+h1, h2, h3 { font-family: var(--head); font-weight: 500; letter-spacing: -.025em; margin: 0; line-height: .9; }
 .pill { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; background: var(--orange); color: var(--white); padding: 11px 18px; font: 600 14px/1 var(--body); text-decoration: none; transition: transform .25s cubic-bezier(.34,1.56,.64,1), background .2s; }
-.pill:hover { transform: translateY(-2px) rotate(-1.5deg); }
+.pill:hover { transform: translateY(-2px); }
+.pill:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--brown); outline-offset: 3px; }
 .pill.light { background: var(--white); color: var(--brown); }
 .pill.dark { background: var(--brown); color: var(--cream); }
 .pill.small { padding: 8px 12px; font-size: 13px; }
@@ -26,36 +28,39 @@ h1, h2, h3 { font-family: var(--head); font-weight: 400; text-transform: upperca
 /* Kopf */
 .topbar { position: fixed; inset: 14px 14px auto 14px; z-index: 30; display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
 .topbar > * { pointer-events: auto; }
-.who { background: var(--white); border-radius: 999px; padding: 8px 14px; font-size: 13px; display: flex; gap: 8px; align-items: center; box-shadow: 0 4px 14px rgba(58,36,22,.12); }
+.who { white-space: nowrap; background: var(--white); border-radius: 999px; padding: 8px 14px; font-size: 13px; display: flex; gap: 8px; align-items: center; box-shadow: 0 4px 14px rgba(58,36,22,.12); }
 .who select { border: 0; background: transparent; font-weight: 700; }
 .demo { background: var(--brown); color: var(--sand); border-radius: 999px; padding: 6px 12px; font-size: 12px; }
 
 /* Szenen */
 .scene { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 60px; position: relative; overflow: hidden; }
-.hero { background: linear-gradient(#f9d8a4, var(--sand)); }
-.hero h1 { font-size: clamp(52px, 11vw, 150px); color: var(--brown); max-width: 13ch; }
-.hero .sub { margin-top: 22px; font: 400 clamp(20px, 3vw, 30px)/1 var(--head); color: var(--orange); text-transform: lowercase; }
-.hero .scroll { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); width: 42px; height: 42px; border-radius: 12px; background: var(--orange); color: #fff; display: grid; place-items: center; animation: bob 1.8s ease-in-out infinite; }
-@keyframes bob { 50% { transform: translate(-50%, 6px); } }
-.deco { position: absolute; font-size: 54px; opacity: .9; pointer-events: none; }
-.intro { background: var(--orange); color: var(--cream); }
-.intro h2 { font-size: clamp(46px, 9vw, 120px); max-width: 12ch; color: var(--brown); }
-.intro p { max-width: 520px; font-size: 18px; margin: 22px auto 0; }
-.intro .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
-
+.hero { background: var(--orange); align-items: flex-start; justify-content: flex-end; text-align: left; padding: 120px clamp(20px, 5vw, 72px) clamp(40px, 7vh, 80px); }
+.hero h1 { font-size: clamp(58px, 12.6vw, 230px); color: var(--brown); line-height: .86; letter-spacing: -.035em; }
+.hero h1 span { display: block; }
+.hero .sub { margin-top: clamp(18px, 3vh, 30px); font-size: clamp(18px, 1.9vw, 26px); line-height: 1.2; color: var(--brown); display: flex; flex-wrap: wrap; gap: .1em .45em; }
+.hero .sub .f { font-family: var(--head); font-style: italic; }
+.hero .sub .c { font-family: "Comic Neue", "Comic Sans MS", cursive; font-weight: 700; }
+.hero .sub .p { font-family: "Pixelify Sans", monospace; }
 .month { gap: 26px; }
+
 .month .head { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.month .head h2 { font-size: clamp(60px, 13vw, 170px); }
-.month .owner { font: 400 22px/1 var(--head); text-transform: uppercase; background: rgba(255,255,255,.75); color: var(--brown); padding: 9px 16px; border-radius: 999px; }
+.month .head h2 { font-size: clamp(64px, 11vw, 190px); }
+.month .owner { font: italic 400 clamp(24px, 2.6vw, 36px)/1 var(--head); color: var(--brown); }
 .month .owner small { font: 500 13px var(--body); text-transform: none; opacity: .7; margin-left: 6px; }
-.sheetWrap { position: relative; width: min(78vw, 360px); aspect-ratio: 303 / 426; border-radius: 6px; box-shadow: 0 30px 60px rgba(58,36,22,.32); transform: rotate(var(--r, -2deg)); transition: transform .4s cubic-bezier(.34,1.56,.64,1); background: #fff; }
+.sheetWrap { position: relative; width: min(78vw, 380px, 62vh * 303 / 426); aspect-ratio: 303 / 426; border-radius: 6px; box-shadow: 0 30px 60px rgba(58,36,22,.32); transform: rotate(var(--r, -2deg)); transition: transform .4s cubic-bezier(.34,1.56,.64,1); background: #fff; }
 .sheetWrap:hover { transform: rotate(0deg) scale(1.02); }
 .sheetWrap canvas { width: 100%; height: 100%; display: block; border-radius: 6px; }
 .month .meta { font-size: 13px; opacity: .75; }
 .month .btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-
+@media (min-width: 900px) {
+  .month { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: ". sheet" "head sheet" "btns sheet" "meta sheet" ". sheet"; grid-template-rows: 1fr auto auto auto 1fr; align-content: center; justify-content: stretch; text-align: left; column-gap: clamp(30px, 6vw, 110px); row-gap: 26px; padding: 80px clamp(30px, 6vw, 110px); }
+  .month .head { grid-area: head; align-items: flex-start; }
+  .month .btns { grid-area: btns; justify-content: flex-start; }
+  .month .meta { grid-area: meta; align-self: start; }
+  .month .sheetWrap { grid-area: sheet; width: min(36vw, 74vh * 303 / 426, 520px); }
+}
 .dl { background: var(--brown); color: var(--cream); }
-.dl h2 { font-size: clamp(40px, 7vw, 90px); color: var(--sand); }
+.dl h2 { font-size: clamp(44px, 7vw, 100px); color: var(--sand); }
 .dl p { max-width: 560px; margin: 18px auto 0; opacity: .85; }
 .dl .btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
 .progress { margin-top: 16px; font-size: 14px; color: var(--sand); min-height: 20px; }
@@ -68,31 +73,31 @@ h1, h2, h3 { font-family: var(--head); font-weight: 400; text-transform: upperca
 .wichtel .btns { display: flex; gap: 10px; justify-content: center; margin-top: 26px; flex-wrap: wrap; }
 
 footer { background: var(--orange); color: var(--brown); text-align: center; padding: 60px 20px 70px; }
-footer h2 { font-size: clamp(40px, 8vw, 110px); }
+footer h2 { font-size: clamp(40px, 8vw, 120px); font-style: italic; font-weight: 400; }
 
 /* Dialoge */
 .modal { position: fixed; inset: 0; z-index: 60; background: rgba(42,26,16,.55); display: grid; place-items: center; padding: 18px; }
 .card { background: var(--cream); border-radius: 22px; padding: 26px 24px; width: min(460px, 100%); max-height: 92vh; overflow: auto; text-align: left; color: var(--brown); }
-.card h3 { font-size: 34px; margin-bottom: 14px; }
+.card h3 { font-size: 38px; margin-bottom: 14px; }
 .card label { display: grid; gap: 5px; font-size: 13px; font-weight: 700; margin-top: 12px; }
 .card input, .card select, .card textarea { border: 2px solid var(--brown); border-radius: 12px; padding: 10px 12px; background: #fff; font-weight: 500; font-size: 16px; }
 .card .row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
 .card .note { font-size: 13px; opacity: .8; margin-top: 10px; }
 .card .err { color: #b3261e; font-size: 14px; margin-top: 10px; min-height: 1em; }
 .reveal { text-align: center; }
-.reveal .big { font: 400 clamp(40px, 10vw, 64px)/1 var(--head); text-transform: uppercase; color: var(--orange); margin: 10px 0; }
+.reveal .big { font: 500 clamp(40px, 10vw, 64px)/1 var(--head); color: var(--orange); margin: 10px 0; }
 
 /* Editor */
 .editor { position: fixed; inset: 0; z-index: 50; background: #2a1a10; display: grid; grid-template-columns: minmax(0, 1fr) 380px; }
 .stage { position: relative; display: flex; align-items: center; justify-content: center; padding: 64px 20px 20px; min-height: 0; }
-.stage canvas { max-width: 100%; max-height: 100%; box-shadow: 0 20px 50px rgba(0,0,0,.5); touch-action: none; background: #fff; }
+.stage canvas { max-width: 100%; max-height: 100%; touch-action: none; display: block; }
 .ebar { position: absolute; inset: 14px 14px auto 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--cream); }
-.ebar h3 { font-size: 26px; color: var(--sand); }
+.ebar h3 { font-size: 30px; color: var(--sand); }
 .ebar .saved { font-size: 12px; opacity: .7; margin-left: 10px; font-family: var(--body); text-transform: none; }
 .side { background: var(--cream); overflow-y: auto; padding: 18px 18px 60px; }
 .side section { border-bottom: 2px dashed rgba(58,36,22,.2); padding: 16px 0; }
 .side section:first-child { padding-top: 4px; }
-.side h4 { margin: 0 0 10px; font: 400 18px/1 var(--head); text-transform: uppercase; }
+.side h4 { margin: 0 0 10px; font: 500 21px/1 var(--head); letter-spacing: -.01em; }
 .presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .presets button { border: 0; background: #fff; border-radius: 12px; padding: 6px 6px 8px; font-size: 12px; font-weight: 700; display: grid; gap: 5px; transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
 .presets button:nth-child(odd) { transform: rotate(-1.5deg); }
@@ -121,16 +126,13 @@ footer h2 { font-size: clamp(40px, 8vw, 110px); }
   .presets { grid-template-columns: repeat(4, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-.intro .scroll, .hero .scroll { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; animation: bob 1.8s ease-in-out infinite; }
-.intro { position: relative; }
-.intro .scroll { background: var(--brown); color: var(--cream); }
 .fontBtn { width: 100%; text-align: left; border: 2px solid var(--brown); border-radius: 10px; padding: 8px 12px; background: #fff; font-size: 20px; display: flex; justify-content: space-between; align-items: center; }
 .fontBtn small { font: 700 11px var(--body); opacity: .55; }
 .fontList { max-height: 300px; overflow-y: auto; border: 2px solid var(--brown); border-radius: 10px; background: #fff; margin-top: 6px; }
 .fontList button { display: flex; justify-content: space-between; align-items: baseline; width: 100%; border: 0; border-bottom: 1px solid rgba(58,36,22,.12); background: none; padding: 9px 12px; font-size: 21px; text-align: left; color: var(--brown); }
 .fontList button small { font: 600 10px var(--body); opacity: .5; flex: none; margin-left: 8px; }
 .fontList button[aria-pressed="true"] { background: var(--sand); }
-.fontList .grp { font: 700 11px var(--body); text-transform: uppercase; letter-spacing: .06em; padding: 10px 12px 4px; opacity: .6; }
+.fontList .grp { font: 700 12px var(--body); padding: 10px 12px 4px; opacity: .6; }
 .shapes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
 .shapes button { border: 2px solid transparent; background: #fff; border-radius: 10px; padding: 4px; aspect-ratio: 1; }
 .shapes button[aria-pressed="true"] { border-color: var(--orange); }
@@ -216,12 +218,12 @@ const ownerOf = (pid) => (pid === 'cover' ? 'alle' : PEOPLE[(+pid.slice(1) - 1) 
 // Druck: WIRmachenDRUCK A3 hoch Wire-O: 303 x 426 mm inkl. 3 mm Beschnitt, 15 mm Abstand zur Bindung oben
 const W = 303, H = 426, BLEED = 3, SAFE = 5, BIND = 15;
 // Schriften aus dem Font Collector (kommerziell, Google Fonts) plus drei Extras für Kommentare
-const FONTS = ['Tilt Warp', 'Bricolage Grotesque', 'Space Grotesk', 'Syne', 'Unbounded', 'Big Shoulders Display', 'Bebas Neue', 'Anton', 'Archivo Black', 'Climate Crisis', 'Bagel Fat One', 'Krona One', 'Bungee', 'Monoton', 'Rubik Glitch', 'Rampart One', 'Silkscreen', 'Pixelify Sans', 'Handjet', 'Major Mono Display', 'Space Mono', 'Instrument Serif', 'Fraunces', 'Young Serif', 'Gloock', 'DM Serif Display', 'Bodoni Moda', 'Newsreader', 'Hanken Grotesk', 'Familjen Grotesk', 'Instrument Sans', 'Schibsted Grotesk', 'Onest', 'Gabarito', 'Geist', 'Inter Tight', 'Manrope', 'Sora', 'Outfit', 'Epilogue', 'Darker Grotesque', 'Archivo', 'Comic Neue', 'Bangers', 'Caveat'];
+const FONTS = ['Sentient', 'Tilt Warp', 'Bricolage Grotesque', 'Space Grotesk', 'Syne', 'Unbounded', 'Big Shoulders Display', 'Bebas Neue', 'Anton', 'Archivo Black', 'Climate Crisis', 'Bagel Fat One', 'Krona One', 'Bungee', 'Monoton', 'Rubik Glitch', 'Rampart One', 'Silkscreen', 'Pixelify Sans', 'Handjet', 'Major Mono Display', 'Space Mono', 'Instrument Serif', 'Fraunces', 'Young Serif', 'Gloock', 'DM Serif Display', 'Bodoni Moda', 'Newsreader', 'Hanken Grotesk', 'Familjen Grotesk', 'Instrument Sans', 'Schibsted Grotesk', 'Onest', 'Gabarito', 'Geist', 'Inter Tight', 'Manrope', 'Sora', 'Outfit', 'Epilogue', 'Darker Grotesque', 'Archivo', 'Comic Neue', 'Bangers', 'Caveat'];
 const EXTRA_FONTS = ['Comic Neue', 'Bangers', 'Caveat'];
 const WICHTEL_ON = false; // Wichteln erstmal ausgeblendet
 // jede Schrift einzeln laden: fällt eine aus, bleiben die anderen
 const fontsCSS = Promise.all(FONTS.map((f) => new Promise((res) => {
-  const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=' + f.replace(/ /g, '+') + (f === 'Comic Neue' ? ':wght@400;700' : '') + '&display=block';
+  const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = f === 'Sentient' ? 'https://api.fontshare.com/v2/css?f[]=sentient@300,400,500,700,400i,500i&display=block' : 'https://fonts.googleapis.com/css2?family=' + f.replace(/ /g, '+') + (f === 'Comic Neue' ? ':wght@400;700' : '') + '&display=block';
   l.onload = l.onerror = res; setTimeout(res, 8000); document.head.append(l);
 })));
 const fontState = new Map();
@@ -381,7 +383,7 @@ function drawEl(g, el, page, opt) {
       if (el.filter === 'duo' || el.filter === 'riso') g.drawImage(photoCanvas(im, el, iw * ppm, ih * ppm), ix, iy, iw, ih);
       else { if ('filter' in g) g.filter = { bw: 'grayscale(1) contrast(1.15)', warm: 'sepia(.35) saturate(1.3) contrast(1.05)', fade: 'contrast(.85) brightness(1.08) saturate(.8)', pop: 'saturate(1.6) contrast(1.15)' }[el.filter] || 'none'; coverDraw(g, im, ix, iy, iw, ih, el); if ('filter' in g) g.filter = 'none'; }
     } else if (!opt.print) {
-      g.fillStyle = 'rgba(58,36,22,.12)'; g.fillRect(ix, iy, iw, ih); g.fillStyle = 'rgba(58,36,22,.55)'; g.font = `${Math.max(6, Math.min(iw, ih) / 9)}px "Tilt Warp", sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(el.src ? '…' : 'upload', ix + iw / 2, iy + ih / 2); g.textAlign = 'left';
+      g.fillStyle = 'rgba(58,36,22,.12)'; g.fillRect(ix, iy, iw, ih); g.fillStyle = 'rgba(58,36,22,.55)'; g.font = `${Math.max(6, Math.min(iw, ih) / 9)}px "Onest", sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(el.src ? '…' : 'upload', ix + iw / 2, iy + ih / 2); g.textAlign = 'left';
     }
     g.restore();
     if (el.frame === 'comic') { g.lineWidth = 2.2; g.strokeStyle = '#101010'; rr(g, ix, iy, iw, ih, el.r || 0); g.stroke(); }
@@ -439,7 +441,7 @@ const PRESETS = {
   collage: { name: 'Collage', make: (m, nm) => ({ bg: '#e9dccb', els: [mk.photo(95, 120, 130, 130, { frame: 'tape', rot: -4 }), mk.photo(210, 135, 120, 150, { frame: 'tape', rot: 3 }), mk.photo(100, 265, 140, 120, { frame: 'tape', rot: 2 }), mk.photo(215, 285, 120, 130, { frame: 'tape', rot: -3 }), mk.text(CX, TOP + 12, 260, nm, 'Gloock', 26, '#3a2416', { align: 'center' }), m >= 0 && mk.cal(CX, H - 34, 260, m, { style: 'leiste', size: 4.6, color: '#3a2416' })] }) },
   plakat: { name: 'Plakat', make: (m, nm) => ({ bg: '#f26b21', els: [mk.text(CX, 78, 285, nm.toUpperCase(), 'Climate Crisis', 44, '#3a2416', { align: 'center' }), mk.photo(CX, 255, 265, 230, { r: 10 }), m >= 0 && mk.cal(CX, H - 34, 200, m, { size: 4.4, color: '#3a2416', font: 'Archivo Black' })] }) },
   band: { name: 'Linienband', make: (m, nm) => ({ bg: '#152238', els: [mk.photo(CX, 200, 220, 260, { r: 110 }), { id: uid(), type: 'band', x: 0, y: 0, w: W, h: H, rot: 0, pts: randomStroke({ x: 10, y: 120, w: W - 20, h: 200 }, (m + 3) * 7), bw: 26, lines: 16, twists: 2, color: '#ffffff', color2: '#ff77cd', lw: 0.6 }, mk.text(CX, TOP + 14, 280, nm, 'Instrument Serif', 34, '#fbeedb', { align: 'center' }), m >= 0 && mk.cal(CX, H - 38, 230, m, { size: 4.6, color: '#fbeedb', font: 'Instrument Sans' })] }) },
-  titel: { name: 'Deckblatt', make: () => ({ bg: '#f6c886', els: [mk.text(CX, 92, 285, '2027', 'Climate Crisis', 78, '#f26b21', { align: 'center' }), mk.text(CX, 150, 260, 'Hoch die Hände, Jahresende!', 'Tilt Warp', 16, '#3a2416', { align: 'center' }), mk.photo(90, 255, 120, 140, { frame: 'tape', rot: -5 }), mk.photo(CX, 240, 110, 130, { frame: 'tape', rot: 3 }), mk.photo(215, 260, 115, 135, { frame: 'tape', rot: -2 }), mk.text(CX, H - 40, 260, PEOPLE.join(' · '), 'Onest', 7, '#3a2416', { align: 'center' })] }) },
+  titel: { name: 'Deckblatt', make: () => ({ bg: '#f6c886', els: [mk.text(CX, 92, 285, '2027', 'Climate Crisis', 78, '#f26b21', { align: 'center' }), mk.text(CX, 150, 260, 'Hoch die Hände, Jahresende!', 'Sentient', 17, '#3a2416', { align: 'center' }), mk.photo(90, 255, 120, 140, { frame: 'tape', rot: -5 }), mk.photo(CX, 240, 110, 130, { frame: 'tape', rot: 3 }), mk.photo(215, 260, 115, 135, { frame: 'tape', rot: -2 }), mk.text(CX, H - 40, 260, PEOPLE.join(' · '), 'Onest', 7, '#3a2416', { align: 'center' })] }) },
 };
 function applyPreset(page, key, pid) {
   const m = pid === 'cover' ? -1 : +pid.slice(1) - 1, nm = m < 0 ? '2027' : MONTHS[m];
@@ -460,14 +462,8 @@ function renderMain() {
   const main = $('#main');
   main.innerHTML = `
   <section class="scene hero">
-    <span class="deco" style="left:7%;top:18%">❄</span><span class="deco" style="right:9%;top:26%;font-size:40px">✦</span><span class="deco" style="left:14%;bottom:18%;font-size:36px">✦</span>
-    <h1>Hoch die Hände, Jahresende!</h1>
-    <div class="sub">present maker</div>
-    <a class="scroll" href="#kalender" aria-label="Weiter">↓</a>
-  </section>
-  <section class="scene intro" id="kalender">
-    <h2>Foto, Comic sans, MS Paint</h2>
-    <a class="scroll" href="#cover" aria-label="Weiter">↓</a>
+    <h1><span>Hoch die Hände,</span><span>Jahresende!</span></h1>
+    <p class="sub"><span class="f">Foto,</span><span class="c">Comic Sans,</span><span class="p">MS Paint</span></p>
   </section>
   ${PAGES.map((pid, i) => {
     const m = i - 1, col = m < 0 ? '#f6c886' : MCOL[m], info = PAGESDATA[pid];
@@ -507,33 +503,63 @@ function openEditor(pid) {
   document.body.append(box); document.body.style.overflow = 'hidden';
   const c = $('#ec'); fitCanvas(); window.addEventListener('resize', fitCanvas);
   c.addEventListener('pointerdown', onDown); c.addEventListener('pointermove', onMove); c.addEventListener('pointerup', onUp); c.addEventListener('pointercancel', onUp);
+  c.addEventListener('wheel', (e) => { // Trackpad-Zoom oder Strg/⌘ + Mausrad skaliert das ausgewählte Element
+    const el = ED && ED.page.els.find((q) => q.id === ED.sel); if (!el || !(e.ctrlKey || e.metaKey)) return; e.preventDefault();
+    scaleEl(el, JSON.parse(JSON.stringify(el)), clamp(Math.exp(-e.deltaY * 0.01), 0.8, 1.25)); changed();
+  }, { passive: false });
   $('#close').onclick = closeEditor; $('#reset').onclick = () => { const cur = ED.page, last = cur.edited ? strip(cur) : cur.last; ED.page = defaultPage(ED.pid); ED.page.last = last || null; ED.sel = null; fontOpen = false; changed(true); renderSide(); toast('Zurück auf Anfang. Die alte Fassung liegt unter „zuletzt designt“.'); }; $('#guides').onclick = () => { ED.guides = !ED.guides; edRender(); };
   renderSide(); edRender();
 }
 function closeEditor() { flushSave(); window.removeEventListener('resize', fitCanvas); $('#editor').remove(); document.body.style.overflow = ''; ED = null; thumbs(); }
+const EM = 16; // Rand um das Blatt im Editor (mm), damit Anfasser außerhalb greifbar bleiben
 function fitCanvas() {
-  const c = $('#ec'), st = c.parentElement, r = st.getBoundingClientRect(), avW = r.width - 40, avH = r.height - 90, s = Math.min(avW / W, avH / H), dpr = window.devicePixelRatio || 1;
-  c.style.width = W * s + 'px'; c.style.height = H * s + 'px'; c.width = Math.round(W * s * dpr); c.height = Math.round(H * s * dpr); ED.scale = s * dpr; edRender();
+  const c = $('#ec'), st = c.parentElement, r = st.getBoundingClientRect(), avW = r.width - 12, avH = r.height - 70, s = Math.min(avW / (W + 2 * EM), avH / (H + 2 * EM)), dpr = window.devicePixelRatio || 1;
+  c.style.width = (W + 2 * EM) * s + 'px'; c.style.height = (H + 2 * EM) * s + 'px'; c.width = Math.round((W + 2 * EM) * s * dpr); c.height = Math.round((H + 2 * EM) * s * dpr); ED.scale = s * dpr; ED.ppx = s; edRender();
+}
+// Anfasser: Ecken skalieren proportional, Seiten strecken
+function handlesOf(el) {
+  const c = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+  if (el.type === 'photo' || el.type === 'shape') return [...c, [-1, 0], [1, 0], [0, -1], [0, 1]];
+  return [...c, [-1, 0], [1, 0]];
+}
+function handleAt(el, x, y) { const [lx, ly] = local(el, x, y), hr = 13 / ED.ppx; return handlesOf(el).find(([sx, sy]) => Math.hypot(lx - sx * el.w / 2, ly - sy * el.h / 2) < hr) || null; }
+const cursorFor = ([sx, sy]) => (sx && sy ? (sx * sy > 0 ? 'nwse-resize' : 'nesw-resize') : sx ? 'ew-resize' : 'ns-resize');
+function scaleEl(el, o, k) { // um die Mitte skalieren (Pinch, Trackpad)
+  if (el.type === 'band') { const [x0, y0, x1, y1] = bandBox({ ...o, pts: o.pts }), cx = (x0 + x1) / 2, cy = (y0 + y1) / 2; el.pts = o.pts.map((v, i) => (i % 2 ? cy + (v - cy) * k : cx + (v - cx) * k)); return; }
+  el.w = Math.max(4, o.w * k); el.h = Math.max(4, o.h * k); if (o.size) el.size = clamp(o.size * k, 1.5, 260);
 }
 const BH = 9; // Anfasser pro Band
 function bandBox(el) { let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; const P = el.pts; for (let i = 0; i < P.length; i += 2) { x0 = Math.min(x0, P[i]); x1 = Math.max(x1, P[i]); y0 = Math.min(y0, P[i + 1]); y1 = Math.max(y1, P[i + 1]); } const pad = el.bw / 2 + 2; return [x0 - pad, y0 - pad, x1 + pad, y1 + pad]; }
 function bandHandles(el) { const n = el.pts.length / 2, out = []; for (let i = 0; i < BH; i++) { const k = Math.round(i * (n - 1) / (BH - 1)); out.push([k, el.pts[k * 2], el.pts[k * 2 + 1]]); } return out; }
 function bandDist(el, x, y) { const P = el.pts; let d = 1e9; for (let i = 0; i + 3 < P.length; i += 2) { const ax = P[i], ay = P[i + 1], bx = P[i + 2], by = P[i + 3], vx = bx - ax, vy = by - ay, L = vx * vx + vy * vy || 1, t = clamp(((x - ax) * vx + (y - ay) * vy) / L, 0, 1); d = Math.min(d, Math.hypot(x - ax - vx * t, y - ay - vy * t)); } return d; }
 function edRender() {
-  if (!ED) return; const c = $('#ec'), g = c.getContext('2d'); g.setTransform(ED.scale, 0, 0, ED.scale, 0, 0); drawPage(g, ED.page, { ppm: ED.scale, guides: ED.guides });
+  if (!ED) return; const c = $('#ec'), g = c.getContext('2d'), S = ED.scale, dpr = window.devicePixelRatio || 1;
+  g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height); g.setTransform(S, 0, 0, S, EM * S, EM * S);
+  g.save(); g.shadowColor = 'rgba(0,0,0,.45)'; g.shadowBlur = 26 * dpr; g.shadowOffsetY = 8 * dpr; g.fillStyle = '#fff'; g.fillRect(0, 0, W, H); g.restore();
+  g.save(); g.globalAlpha = 0.22; drawPage(g, ED.page, { ppm: S }); g.restore(); // was übers Blatt hinausragt, blass zeigen
+  g.save(); g.beginPath(); g.rect(0, 0, W, H); g.clip(); drawPage(g, ED.page, { ppm: S, guides: ED.guides }); g.restore();
   const el = ED.page.els.find((e) => e.id === ED.sel);
   if (el && el.type === 'band' && !ED.bandMode) {
     const [x0, y0, x1, y1] = bandBox(el), u = 1 / ED.scale * 2; g.strokeStyle = '#f26b21'; g.lineWidth = 1.6 * u; g.setLineDash([3, 2]); g.strokeRect(x0, y0, x1 - x0, y1 - y0); g.setLineDash([]);
     g.fillStyle = '#f26b21'; g.fillRect(x1 - 4, y1 - 4, 8, 8);
     for (const [, hx, hy] of bandHandles(el)) { g.beginPath(); g.arc(hx, hy, 3.4, 0, Math.PI * 2); g.fillStyle = '#fff'; g.fill(); g.lineWidth = 1.4 * u; g.strokeStyle = '#f26b21'; g.stroke(); }
-  } else if (el && !ED.bandMode) { g.save(); g.translate(el.x, el.y); g.rotate((el.rot || 0) * Math.PI / 180); g.strokeStyle = '#f26b21'; g.lineWidth = 1.6 / ED.scale * 2; g.setLineDash([3, 2]); g.strokeRect(-el.w / 2, -el.h / 2, el.w, el.h); g.setLineDash([]); g.fillStyle = '#f26b21'; g.fillRect(el.w / 2 - 4, el.h / 2 - 4, 8, 8); g.restore(); }
+  } else if (el && !ED.bandMode) {
+    const u = 1 / ED.ppx, hs = 9 * u; g.save(); g.translate(el.x, el.y); g.rotate((el.rot || 0) * Math.PI / 180);
+    g.strokeStyle = '#f26b21'; g.lineWidth = 1.5 * u; g.setLineDash([5 * u, 4 * u]); g.strokeRect(-el.w / 2, -el.h / 2, el.w, el.h); g.setLineDash([]);
+    for (const [sx, sy] of handlesOf(el)) { const hx = sx * el.w / 2, hy = sy * el.h / 2; g.fillStyle = '#fff'; g.lineWidth = 1.6 * u; if (sx && sy) { g.fillRect(hx - hs / 2, hy - hs / 2, hs, hs); g.strokeRect(hx - hs / 2, hy - hs / 2, hs, hs); } else { g.beginPath(); g.arc(hx, hy, hs * 0.42, 0, Math.PI * 2); g.fill(); g.stroke(); } }
+    g.restore();
+  }
   if (ED.live) { g.strokeStyle = '#ff77cd'; g.lineWidth = 1.2; g.beginPath(); for (let i = 0; i < ED.live.length; i += 2) g[i ? 'lineTo' : 'moveTo'](ED.live[i], ED.live[i + 1]); g.stroke(); }
 }
-function toPage(e) { const r = $('#ec').getBoundingClientRect(); return [(e.clientX - r.left) / r.width * W, (e.clientY - r.top) / r.height * H]; }
+function toPage(e) { const r = $('#ec').getBoundingClientRect(); return [(e.clientX - r.left) / r.width * (W + 2 * EM) - EM, (e.clientY - r.top) / r.height * (H + 2 * EM) - EM]; }
 function local(el, x, y) { const a = -(el.rot || 0) * Math.PI / 180, dx = x - el.x, dy = y - el.y; return [dx * Math.cos(a) - dy * Math.sin(a), dx * Math.sin(a) + dy * Math.cos(a)]; }
 function hit(x, y) { const els = ED.page.els; for (let i = els.length - 1; i >= 0; i--) { const e = els[i]; if (e.type === 'band') { if (bandDist(e, x, y) <= e.bw / 2 + 3) return e; continue; } const [lx, ly] = local(e, x, y); if (Math.abs(lx) <= e.w / 2 && Math.abs(ly) <= e.h / 2) return e; } return null; }
+const PTRS = new Map();
 function onDown(e) {
-  const [x, y] = toPage(e); $('#ec').setPointerCapture(e.pointerId);
+  const [x, y] = toPage(e); $('#ec').setPointerCapture(e.pointerId); PTRS.set(e.pointerId, [e.clientX, e.clientY]);
+  if (PTRS.size === 2 && !ED.bandMode) { // zwei Finger: ausgewähltes Element skalieren
+    const s0 = ED.page.els.find((q) => q.id === ED.sel); if (s0) { const [a, b] = [...PTRS.values()]; ED.drag = { mode: 'pinch', el: s0, o: JSON.parse(JSON.stringify(s0)), d0: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1 }; } return;
+  }
   if (ED.bandMode) { ED.live = [x, y]; return; }
   const sel = ED.page.els.find((q) => q.id === ED.sel);
   if (sel && sel.type === 'band') {
@@ -541,23 +567,42 @@ function onDown(e) {
     if (Math.abs(x - x1) < 7 && Math.abs(y - y1) < 7) { ED.drag = { mode: 'bscale', el: sel, orig, box: [x0, y0, x1, y1] }; return; }
     const hd = bandHandles(sel).find(([, hx, hy]) => Math.hypot(hx - x, hy - y) < 7); if (hd) { ED.drag = { mode: 'bend', el: sel, orig, k: hd[0], sx: x, sy: y }; return; }
   }
-  if (sel && sel.type !== 'band') { const [lx, ly] = local(sel, x, y); if (Math.abs(lx - sel.w / 2) < 8 && Math.abs(ly - sel.h / 2) < 8) { ED.drag = { mode: 'size', el: sel, w: sel.w, h: sel.h, sx: lx, sy: ly, size: sel.size }; return; } }
+  if (sel && sel.type !== 'band') { const hd = handleAt(sel, x, y); if (hd) { ED.drag = { mode: 'size', el: sel, o: { x: sel.x, y: sel.y, w: sel.w, h: sel.h, size: sel.size, rot: sel.rot || 0 }, sx: hd[0], sy: hd[1] }; return; } }
   const el = hit(x, y); if ((el ? el.id : null) !== ED.sel) fontOpen = false; ED.sel = el ? el.id : null;
   if (el && el.type === 'band') ED.drag = { mode: 'bmove', el, orig: el.pts.slice(), sx: x, sy: y };
   else if (el) ED.drag = { mode: 'move', el, dx: x - el.x, dy: y - el.y };
   renderSide(); edRender();
 }
 function onMove(e) {
+  if (PTRS.has(e.pointerId)) PTRS.set(e.pointerId, [e.clientX, e.clientY]);
+  if (ED.drag && ED.drag.mode === 'pinch') { const d = ED.drag, [a, b] = [...PTRS.values()]; if (!b) return; scaleEl(d.el, d.o, clamp(Math.hypot(a[0] - b[0], a[1] - b[1]) / d.d0, 0.1, 10)); d.moved = true; edRender(); return; }
+  if (!ED.drag && !ED.live && e.pointerType === 'mouse') { // Mauszeiger zeigt, was man greift
+    const [x, y] = toPage(e), sel = ED.page.els.find((q) => q.id === ED.sel), hd = sel && sel.type !== 'band' && !ED.bandMode ? handleAt(sel, x, y) : null;
+    $('#ec').style.cursor = ED.bandMode ? 'crosshair' : hd ? cursorFor(hd) : hit(x, y) ? 'move' : 'default';
+  }
   if (ED.live) { const [x, y] = toPage(e), n = ED.live.length; if (Math.hypot(x - ED.live[n - 2], y - ED.live[n - 1]) > 1) { ED.live.push(x, y); edRender(); } return; }
   const d = ED.drag; if (!d) return; const [x, y] = toPage(e); d.moved = true;
   if (d.mode === 'bmove') { const o = d.orig, dx = x - d.sx, dy = y - d.sy; d.el.pts = o.map((v, i) => v + (i % 2 ? dy : dx)); }
   else if (d.mode === 'bend') { const o = d.orig, n = o.length / 2, sg = Math.max(2, n / (BH - 1) * 0.9), dx = x - d.sx, dy = y - d.sy; d.el.pts = o.map((v, i) => { const j = i >> 1, wgt = Math.exp(-(((j - d.k) / sg) ** 2)); return v + wgt * (i % 2 ? dy : dx); }); }
   else if (d.mode === 'bscale') { const [x0, y0, x1, y1] = d.box, kx = Math.max(0.1, (x - x0) / (x1 - x0)), ky = Math.max(0.1, (y - y0) / (y1 - y0)); d.el.pts = d.orig.map((v, i) => (i % 2 ? y0 + (v - y0) * ky : x0 + (v - x0) * kx)); }
   else if (d.mode === 'move') { d.el.x = x - d.dx; d.el.y = y - d.dy; }
-  else { const [lx, ly] = local(d.el, x, y), kx = Math.max(0.15, (lx + d.w / 2) / (d.sx + d.w / 2)), ky = Math.max(0.15, (ly + d.h / 2) / (d.sy + d.h / 2)); if (d.el.type === 'text') d.el.size = clamp(d.size * kx, 2, 200); else if (d.el.type === 'cal') { d.el.w = d.w * kx; d.el.size = (d.size || 5) * kx; } else { d.el.w = d.w * kx; d.el.h = d.el.type === 'photo' && e.shiftKey ? d.h * kx : d.h * ky; } }
+  else if (d.mode === 'size') {
+    const o = d.o, el = d.el, a = o.rot * Math.PI / 180, cs = Math.cos(a), sn = Math.sin(a), dx = x - o.x, dy = y - o.y;
+    const px = dx * cs + dy * sn, py = -dx * sn + dy * cs, Ax = -d.sx * o.w / 2, Ay = -d.sy * o.h / 2; let lcx = 0, lcy = 0;
+    const free = (el.type === 'photo' || el.type === 'shape') && e.shiftKey;
+    if (d.sx && d.sy && !free) { // Ecke: Seitenverhältnis bleibt
+      const vx = d.sx * o.w, vy = d.sy * o.h, k = Math.max(6 / Math.max(o.w, o.h), ((px - Ax) * vx + (py - Ay) * vy) / (vx * vx + vy * vy));
+      el.w = o.w * k; el.h = o.h * k; if (o.size) el.size = clamp(o.size * k, 1.5, 260); lcx = Ax + vx * k / 2; lcy = Ay + vy * k / 2;
+    } else {
+      if (d.sx) { el.w = Math.max(6, (px - Ax) * d.sx); lcx = Ax + d.sx * el.w / 2; }
+      if (d.sy) { el.h = Math.max(6, (py - Ay) * d.sy); lcy = Ay + d.sy * el.h / 2; }
+    }
+    el.x = o.x + lcx * cs - lcy * sn; el.y = o.y + lcx * sn + lcy * cs;
+  }
   edRender();
 }
-function onUp() {
+function onUp(e) {
+  PTRS.delete(e && e.pointerId);
   if (ED.live) { if (ED.live.length > 8) { const nb = { id: uid(), type: 'band', x: 0, y: 0, w: W, h: H, rot: 0, pts: smoothFlat(ED.live, 1.5), bw: 22, lines: 14, twists: 2, color: '#ffffff', color2: '#ff77cd', lw: 0.6 }; ED.page.els.push(nb); ED.sel = nb.id; ED.bandMode = false; changed(); } ED.live = null; edRender(); renderSide(); return; }
   if (ED.drag) { const mv = ED.drag.moved; ED.drag = null; if (mv) changed(); renderSide(); }
 }
@@ -591,7 +636,7 @@ function renderSide() {
     if (el.type === 'band') s += `${rng('bw', 'Bandbreite', 4, 80, 1, el.bw)}${rng('lines', 'Linien', 3, 40, 1, el.lines)}${rng('twists', 'Drehungen', 0, 10, 0.5, el.twists)}${rng('lw', 'Strichstärke', 0.2, 3, 0.1, el.lw)}<label class="fld">Farbe vorne</label>${swatches('color', el.color)}<label class="fld">Farbe hinten</label>${swatches('color2', el.color2 || el.color)}`;
     if (el.type !== 'band') s += rng('rot', 'Drehen', -180, 180, 1, el.rot || 0);
     s += `<div class="mini"><button class="pill small light" data-act="up">nach vorn</button><button class="pill small light" data-act="down">nach hinten</button><button class="pill small light" data-act="dup">doppeln</button><button class="pill small dark" data-act="del">löschen</button></div></section>`;
-  } else s += `<section><p class="hint">Antippen zum Auswählen, ziehen zum Verschieben, das Quadrat unten rechts ändert die Größe. Bei Bändern biegen die runden Punkte die Form. Löschen mit Backspace.</p></section>`;
+  } else s += `<section><p class="hint">Antippen zum Auswählen, ziehen zum Verschieben. An den Ecken ziehen ändert die Größe, an den Seiten wird gestreckt, mit zwei Fingern geht es auch. Bei Bändern biegen die runden Punkte die Form. Löschen mit Backspace.</p></section>`;
   s += `<section><h4>Druck</h4><div class="adds"><button class="pill small" data-act="pdf">PDF dieses Blatts</button><button class="pill small light" data-act="png">PNG</button></div><p class="hint">A3 hoch, 303 × 426 mm mit 3 mm Beschnitt. Unter „Druckränder“ siehst du Beschnitt (rot), sicheren Bereich (blau) und die Bindung oben.</p></section>`;
   side.innerHTML = s; presetThumbs();
 }
@@ -663,7 +708,7 @@ $('#fileIn').addEventListener('change', async (e) => {
 });
 
 /* ===== Export ===== */
-async function ensureFonts(pids) { await fontsCSS; const fs = new Set(['Tilt Warp', 'Caveat', 'Pixelify Sans']); for (const p of pids) for (const e of pageOf(p).els) if (e.font) fs.add(e.font); await Promise.all([...fs].map((f) => document.fonts.load(`40px "${f}"`).catch(() => 0))); }
+async function ensureFonts(pids) { await fontsCSS; const fs = new Set(['Onest', 'Caveat', 'Pixelify Sans']); for (const p of pids) for (const e of pageOf(p).els) if (e.font) fs.add(e.font); await Promise.all([...fs].map((f) => document.fonts.load(`40px "${f}"`).catch(() => 0))); }
 async function waitImages(pids) { const srcs = new Set(); for (const p of pids) for (const e of pageOf(p).els) if (e.src) srcs.add(e.src); await Promise.all([...srcs].map((s) => new Promise((res) => { const i = imgs.get(s) || (img(s), imgs.get(s)); if (i.complete) return res(); i.addEventListener('load', res, { once: true }); i.addEventListener('error', res, { once: true }); setTimeout(res, 15000); }))); }
 const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 function renderPrint(pid, dpi) { const ppm = dpi / 25.4, c = document.createElement('canvas'); c.width = Math.round(W * ppm); c.height = Math.round(H * ppm); const g = c.getContext('2d'); g.setTransform(ppm, 0, 0, ppm, 0, 0); fxCache.clear(); drawPage(g, pageOf(pid), { ppm, print: true }); return c; }
