@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=sentient@300,400,500,700,400i,500i&display=swap">
 <style>
+@font-face { font-family: 'Jonathan Hand'; src: url('fonts/JonathanHand.woff') format('woff'); font-display: block; }
 :root { --orange: #f26b21; --sand: #f6c886; --cream: #fbeedb; --brown: #3a2416; --ink: #2a1a10; --white: #fff;
   --head: "Sentient", Georgia, "Times New Roman", serif; --body: "Onest", "Helvetica Neue", Arial, sans-serif; }
 * { box-sizing: border-box; }
@@ -220,11 +221,12 @@ const ownerOf = (pid) => (pid === 'cover' ? 'alle' : PEOPLE[(+pid.slice(1) - 1) 
 // Druck: WIRmachenDRUCK A3 hoch Wire-O: 303 x 426 mm inkl. 3 mm Beschnitt, 15 mm Abstand zur Bindung oben
 const W = 303, H = 426, BLEED = 3, SAFE = 5, BIND = 15;
 // Schriften aus dem Font Collector (kommerziell, Google Fonts) plus drei Extras für Kommentare
-const FONTS = ['Sentient', 'Tilt Warp', 'Bricolage Grotesque', 'Space Grotesk', 'Syne', 'Unbounded', 'Big Shoulders Display', 'Bebas Neue', 'Anton', 'Archivo Black', 'Climate Crisis', 'Bagel Fat One', 'Krona One', 'Bungee', 'Monoton', 'Rubik Glitch', 'Rampart One', 'Silkscreen', 'Pixelify Sans', 'Handjet', 'Major Mono Display', 'Space Mono', 'Instrument Serif', 'Fraunces', 'Young Serif', 'Gloock', 'DM Serif Display', 'Bodoni Moda', 'Newsreader', 'Hanken Grotesk', 'Familjen Grotesk', 'Instrument Sans', 'Schibsted Grotesk', 'Onest', 'Gabarito', 'Geist', 'Inter Tight', 'Manrope', 'Sora', 'Outfit', 'Epilogue', 'Darker Grotesque', 'Archivo', 'Comic Neue', 'Bangers', 'Caveat'];
-const EXTRA_FONTS = ['Comic Neue', 'Bangers', 'Caveat'];
+const FONTS = ['Sentient', 'Tilt Warp', 'Bricolage Grotesque', 'Space Grotesk', 'Syne', 'Unbounded', 'Big Shoulders Display', 'Bebas Neue', 'Anton', 'Archivo Black', 'Climate Crisis', 'Bagel Fat One', 'Krona One', 'Bungee', 'Monoton', 'Rubik Glitch', 'Rampart One', 'Silkscreen', 'Pixelify Sans', 'Handjet', 'Major Mono Display', 'Space Mono', 'Instrument Serif', 'Fraunces', 'Young Serif', 'Gloock', 'DM Serif Display', 'Bodoni Moda', 'Newsreader', 'Hanken Grotesk', 'Familjen Grotesk', 'Instrument Sans', 'Schibsted Grotesk', 'Onest', 'Gabarito', 'Geist', 'Inter Tight', 'Manrope', 'Sora', 'Outfit', 'Epilogue', 'Darker Grotesque', 'Archivo', 'Jonathan Hand', 'Comic Neue', 'Bangers', 'Caveat'];
+const EXTRA_FONTS = ['Jonathan Hand', 'Comic Neue', 'Bangers', 'Caveat'];
+const LOCAL_FONTS = ['Jonathan Hand']; // liegt als Datei neben der Seite
 const WICHTEL_ON = false; // Wichteln erstmal ausgeblendet
 // jede Schrift einzeln laden: fällt eine aus, bleiben die anderen
-const fontsCSS = Promise.all(FONTS.map((f) => new Promise((res) => {
+const fontsCSS = Promise.all(FONTS.filter((f) => !LOCAL_FONTS.includes(f)).map((f) => new Promise((res) => {
   const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = f === 'Sentient' ? 'https://api.fontshare.com/v2/css?f[]=sentient@300,400,500,700,400i,500i&display=block' : 'https://fonts.googleapis.com/css2?family=' + f.replace(/ /g, '+') + (f === 'Comic Neue' ? ':wght@400;700' : '') + '&display=block';
   l.onload = l.onerror = res; setTimeout(res, 8000); document.head.append(l);
 })));
