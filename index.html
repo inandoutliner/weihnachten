@@ -26,10 +26,13 @@ h1, h2, h3 { font-family: var(--head); font-weight: 500; letter-spacing: -.025em
 .pill:disabled { opacity: .45; cursor: default; transform: none; }
 
 /* Kopf */
-.topbar { position: fixed; inset: 14px 14px auto 14px; z-index: 30; display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+.topbar { position: fixed; inset: 14px 14px auto 14px; z-index: 30; display: flex; justify-content: flex-end; align-items: center; pointer-events: none; }
 .topbar > * { pointer-events: auto; }
-.who { white-space: nowrap; background: var(--white); border-radius: 999px; padding: 8px 14px; font-size: 13px; display: flex; gap: 8px; align-items: center; box-shadow: 0 4px 14px rgba(58,36,22,.12); }
-.who select { border: 0; background: transparent; font-weight: 700; }
+.whoGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+.whoGrid button { border: 2px solid var(--brown); background: #fff; border-radius: 14px; padding: 14px 6px; font: 500 22px/1 var(--head); color: var(--brown); }
+.whoGrid button:hover { background: var(--sand); }
+.whoami { border: 0; background: none; padding: 0; margin-left: 12px; font: 500 12px var(--body); color: var(--cream); opacity: .7; text-decoration: underline; text-underline-offset: 3px; }
+.whoami:hover { opacity: 1; }
 .demo { background: var(--brown); color: var(--sand); border-radius: 999px; padding: 6px 12px; font-size: 12px; }
 
 /* Szenen */
@@ -142,7 +145,6 @@ footer h2 { font-size: clamp(40px, 8vw, 120px); font-style: italic; font-weight:
 </head>
 <body>
 <div class="topbar">
-  <div class="who">Ich bin <select id="me"></select></div>
   <span class="demo" id="demoBadge" hidden>Demo: speichert nur in diesem Browser</span>
 </div>
 <main id="main"></main>
@@ -455,7 +457,13 @@ function defaultPage(pid) { return applyPreset({ els: [] }, pid === 'cover' ? 't
 /* ===== Zustand ===== */
 let PAGESDATA = {};
 const pageOf = (pid) => (PAGESDATA[pid] && PAGESDATA[pid].data) || defaultPage(pid);
-let me = ls.get('me', '');
+let me = ls.get('me', ''); if (!PEOPLE.includes(me)) me = '';
+function pickMe() { // einmal pro Gerät: wer gestaltet hier? Steht dann unter dem Monat als „Zuletzt: …“
+  return new Promise((res) => {
+    const m = modal(`<h3>Wer bist du?</h3><div class="whoGrid">${PEOPLE.map((p) => `<button type="button" data-me="${p}">${p}</button>`).join('')}</div><p class="note">Unter jedem Monat steht dann, wer zuletzt etwas geändert hat.</p>`, true);
+    m.addEventListener('click', (e) => { const b = e.target.closest('[data-me]'); if (!b) return; e.stopPropagation(); me = b.dataset.me; ls.set('me', me); m.remove(); res(me); }, true);
+  });
+}
 
 /* ===== Startseite ===== */
 function renderMain() {
@@ -494,12 +502,13 @@ function thumbs() {
 /* ===== Editor ===== */
 let ED = null; // { pid, page, sel, drag, bandMode }
 let saveT = 0;
-function openEditor(pid) {
+async function openEditor(pid) {
+  if (!me) await pickMe();
   const page = JSON.parse(JSON.stringify(pageOf(pid)));
   ED = { pid, page, sel: null, bandMode: false };
   const box = document.createElement('div'); box.className = 'editor'; box.id = 'editor';
   const m = pid === 'cover' ? -1 : +pid.slice(1) - 1;
-  box.innerHTML = `<div class="stage"><div class="ebar"><h3>${m < 0 ? 'Deckblatt' : MONTHS[m]} <span class="saved" id="saved"></span></h3><div style="display:flex;gap:8px"><button class="pill small light" id="reset">zurück auf Anfang</button><button class="pill small light" id="guides">Druckränder</button><button class="pill small" id="close">Fertig</button></div></div><canvas id="ec"></canvas></div><aside class="side" id="side"></aside>`;
+  box.innerHTML = `<div class="stage"><div class="ebar"><h3>${m < 0 ? 'Deckblatt' : MONTHS[m]}<button class="whoami" id="whoBtn" title="Name ändern">Du bist ${esc(me)}</button> <span class="saved" id="saved"></span></h3><div style="display:flex;gap:8px"><button class="pill small light" id="reset">zurück auf Anfang</button><button class="pill small light" id="guides">Druckränder</button><button class="pill small" id="close">Fertig</button></div></div><canvas id="ec"></canvas></div><aside class="side" id="side"></aside>`;
   document.body.append(box); document.body.style.overflow = 'hidden';
   const c = $('#ec'); fitCanvas(); window.addEventListener('resize', fitCanvas);
   c.addEventListener('pointerdown', onDown); c.addEventListener('pointermove', onMove); c.addEventListener('pointerup', onUp); c.addEventListener('pointercancel', onUp);
@@ -507,10 +516,10 @@ function openEditor(pid) {
     const el = ED && ED.page.els.find((q) => q.id === ED.sel); if (!el || !(e.ctrlKey || e.metaKey)) return; e.preventDefault();
     scaleEl(el, JSON.parse(JSON.stringify(el)), clamp(Math.exp(-e.deltaY * 0.01), 0.8, 1.25)); changed();
   }, { passive: false });
-  $('#close').onclick = closeEditor; $('#reset').onclick = () => { const cur = ED.page, last = cur.edited ? strip(cur) : cur.last; ED.page = defaultPage(ED.pid); ED.page.last = last || null; ED.sel = null; fontOpen = false; changed(true); renderSide(); toast('Zurück auf Anfang. Die alte Fassung liegt unter „zuletzt designt“.'); }; $('#guides').onclick = () => { ED.guides = !ED.guides; edRender(); };
+  $('#close').onclick = closeEditor; $('#whoBtn').onclick = async () => { await pickMe(); $('#whoBtn').textContent = 'Du bist ' + me; }; $('#reset').onclick = () => { const cur = ED.page, last = cur.edited ? strip(cur) : cur.last; ED.page = defaultPage(ED.pid); ED.page.last = last || null; ED.sel = null; fontOpen = false; changed(true); renderSide(); toast('Zurück auf Anfang. Die alte Fassung liegt unter „zuletzt designt“.'); }; $('#guides').onclick = () => { ED.guides = !ED.guides; edRender(); };
   renderSide(); edRender();
 }
-function closeEditor() { flushSave(); window.removeEventListener('resize', fitCanvas); $('#editor').remove(); document.body.style.overflow = ''; ED = null; thumbs(); }
+function closeEditor() { const pid = ED.pid; flushSave(); const info = PAGESDATA[pid], mt = document.querySelector('#' + pid + ' .meta'); if (mt && info && info.by) mt.textContent = 'Zuletzt: ' + info.by + ', ' + new Date(info.at).toLocaleDateString('de-DE'); window.removeEventListener('resize', fitCanvas); $('#editor').remove(); document.body.style.overflow = ''; ED = null; thumbs(); }
 const EM = 16; // Rand um das Blatt im Editor (mm), damit Anfasser außerhalb greifbar bleiben
 function fitCanvas() {
   const c = $('#ec'), st = c.parentElement, r = st.getBoundingClientRect(), avW = r.width - 12, avH = r.height - 70, s = Math.min(avW / (W + 2 * EM), avH / (H + 2 * EM)), dpr = window.devicePixelRatio || 1;
@@ -804,10 +813,6 @@ function wichtelAction(a) {
 }
 
 /* ===== Start ===== */
-function whoSelect() {
-  const s = $('#me'); s.innerHTML = '<option value="">wer?</option>' + PEOPLE.flatMap((p) => [p, p + 's Partner*in']).map((p) => `<option ${p === me ? 'selected' : ''}>${p}</option>`).join('');
-  s.onchange = () => { me = s.value; ls.set('me', me); };
-}
 function gate() { // Familien-Code, damit nur ihr schreiben könnt; wird gleich gegen die Datenbank geprüft
   return new Promise((res) => {
     const saved = ls.get('code', '');
@@ -823,7 +828,6 @@ function gate() { // Familien-Code, damit nur ihr schreiben könnt; wird gleich 
   });
 }
 async function start() {
-  whoSelect();
   if (CFG.supabaseUrl && CFG.supabaseKey && window.supabase) { api = await gate(); }
   else { api = demoBackend(); $('#demoBadge').hidden = false; }
   try { PAGESDATA = await api.loadPages(); } catch (e) { toast('Laden ging nicht: ' + e.message + ' (Familien-Code richtig?)', 6000); if (!api.demo && /code|permission|denied|policy/i.test(e.message)) { ls.set('code', ''); } }
