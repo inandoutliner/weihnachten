@@ -1,7 +1,6 @@
-/* Hier trägst du nach der Einrichtung deine Supabase-Daten ein (siehe ANLEITUNG.md).
-   Leer gelassen läuft die Seite im Demo-Modus und speichert nur im eigenen Browser. */
+/* Supabase-Daten für den Kalender. Der Publishable Key darf öffentlich sein. */
 window.WG_CONFIG = {
-  supabaseUrl: '',   // z. B. 'https://abcdefgh.supabase.co'
-  supabaseKey: '',   // der "anon public" Key (der darf öffentlich sein)
+  supabaseUrl: 'https://zqeywrfzavvgewkiwooj.supabase.co',
+  supabaseKey: 'sb_publishable_dRRPTzYNln0mVWaaIR9ZGQ_XVPEg1GM',
   deadline: '2026-11-17T23:59:00+01:00'
 };
