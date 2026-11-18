@@ -10,3 +10,5 @@ Online: https://weihnachten.inandoutliner.de (noch nicht aktiv)
 
 Daten (Kalenderseiten, Fotos, Wichtel-Teilnehmer) liegen in Supabase, nicht im Repo.
 Vor dem Start prüfen: E-Mail-Adressen der Teilnehmer dürfen nicht für jeden lesbar sein.
+
+Inhaltskarte für Änderungen: [KARTE.md](KARTE.md)
